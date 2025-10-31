@@ -9,8 +9,13 @@
 <body>
     <header>
         <div class="container">
-            <h1>Lia Hofmann</h1>
-            <p class="tagline">Builder, operator, and chaos-organizer who loves turning early ideas into momentum.</p>
+            <div class="header-content">
+                <img src="profile-photo.png" alt="Lia Hofmann" class="profile-photo">
+                <div class="header-text">
+                    <h1>Lia Hofmann</h1>
+                    <p class="tagline">Builder, operator, and chaos-organizer who loves turning early ideas into momentum.</p>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -21,24 +26,39 @@
 
             <div class="projects">
                 <div class="project-card">
-                    <h3>Finperks <span class="subtitle">— Always ready, always building</span></h3>
-                    <p class="description">B2B white-label rewards platform helping banks embed personalized gifting and cashback directly into their digital channels.</p>
-                    <p class="role"><strong>My role:</strong> Early team member as founders associate focusing on go-to-market and partner operations — helped design the value proposition and first pilot structures.</p>
-                    <p class="outcome"><strong>Outcome:</strong> Helped secure initial meetings with banks and build the foundation for Finperks' first pilot partnerships.</p>
+                    <div class="project-logo">
+                        <img src="finperks-logo.png" alt="Finperks Logo">
+                    </div>
+                    <div class="project-content">
+                        <h3>Finperks <span class="subtitle">— Always ready, always building</span></h3>
+                        <p class="description">B2B white-label rewards platform helping banks embed personalized gifting and cashback directly into their digital channels.</p>
+                        <p class="role"><strong>My role:</strong> Early team member as founders associate focusing on go-to-market and partner operations — helped design the value proposition and first pilot structures.</p>
+                        <p class="outcome"><strong>Outcome:</strong> Helped secure initial meetings with banks and build the foundation for Finperks' first pilot partnerships.</p>
+                    </div>
                 </div>
 
                 <div class="project-card">
-                    <h3>Novosafe <span class="subtitle">— Outbound architect in safety shoes</span></h3>
-                    <p class="description">Security-tech startup building a hybrid SaaS + hardware solution for retail chains.</p>
-                    <p class="role"><strong>My role:</strong> Built the first outbound engine for retail chains from scratch — from lead scraping to outreach automation.</p>
-                    <p class="outcome"><strong>Outcome:</strong> Generated 200+ qualified leads and secured first interested customers within weeks.</p>
+                    <div class="project-logo">
+                        <img src="novosafe-logo.png" alt="Novosafe Logo">
+                    </div>
+                    <div class="project-content">
+                        <h3>Novosafe <span class="subtitle">— Outbound architect in safety shoes</span></h3>
+                        <p class="description">Security-tech startup building a hybrid SaaS + hardware solution for retail chains.</p>
+                        <p class="role"><strong>My role:</strong> Built the first outbound engine for retail chains from scratch — from lead scraping to outreach automation.</p>
+                        <p class="outcome"><strong>Outcome:</strong> Generated 200+ qualified leads and secured first interested customers within weeks.</p>
+                    </div>
                 </div>
 
                 <div class="project-card">
-                    <h3>Blond & Beyond Podcast <span class="subtitle">— Where ambition meets real talk</span></h3>
-                    <p class="description">Podcast exploring professionals, creativity, and growth stories from Europe and beyond.</p>
-                    <p class="role"><strong>My role:</strong> Host and producer — research, interviewing, and editing.</p>
-                    <p class="outcome"><strong>Outcome:</strong> Built a growing international audience and developed strong storytelling skills.</p>
+                    <div class="project-logo">
+                        <img src="blond-beyond-logo.png" alt="Blond & Beyond Podcast Logo">
+                    </div>
+                    <div class="project-content">
+                        <h3>Blond & Beyond Podcast <span class="subtitle">— Where ambition meets real talk</span></h3>
+                        <p class="description">Podcast exploring professionals, creativity, and growth stories from Europe and beyond.</p>
+                        <p class="role"><strong>My role:</strong> Host and producer — research, interviewing, and editing.</p>
+                        <p class="outcome"><strong>Outcome:</strong> Built a growing international audience and developed strong storytelling skills.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -50,6 +70,12 @@
 
             <div id="quiz-container">
                 <div id="question-container">
+                    <div class="quiz-progress">
+                        <div class="progress-info">Question <span id="current-question">1</span> of 4</div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" id="progress-bar"></div>
+                        </div>
+                    </div>
                     <p id="question-text"></p>
                     <div id="answers-container"></div>
                 </div>

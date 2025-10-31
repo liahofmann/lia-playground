@@ -69,6 +69,8 @@ const answersContainer = document.getElementById('answers-container');
 const resultTitle = document.getElementById('result-title');
 const resultDescription = document.getElementById('result-description');
 const restartBtn = document.getElementById('restart-btn');
+const currentQuestionSpan = document.getElementById('current-question');
+const progressBar = document.getElementById('progress-bar');
 
 // Initialize Quiz
 function initQuiz() {
@@ -84,6 +86,11 @@ function showQuestion() {
     const current = quizData[currentQuestion];
     questionText.textContent = current.question;
     answersContainer.innerHTML = '';
+
+    // Update progress
+    const progressPercentage = ((currentQuestion) / quizData.length) * 100;
+    progressBar.style.width = progressPercentage + '%';
+    currentQuestionSpan.textContent = currentQuestion + 1;
 
     current.answers.forEach((answer, index) => {
         const button = document.createElement('button');
