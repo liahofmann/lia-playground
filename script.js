@@ -1,20 +1,20 @@
 // LiaGPT Chat Data
 const chatData = [
     {
-        question: "If you were an animal, what would you be — and why?",
-        answer: "A dolphin: social, curious, and always on the move. I love exploring, connecting with others, and finding fun even in serious situations."
+        question: "What animal would Lia be — and why?",
+        answer: "Lia would be a dolphin: social, curious, and always on the move. She loves exploring, connecting with others, and finding fun even in serious situations."
     },
     {
-        question: "What's your most controversial food that you like?",
-        answer: "I really love mint chocolate chip ice cream — oh, and pineapple on pizza."
+        question: "What's Lia's most controversial food opinion?",
+        answer: "Lia really loves mint chocolate chip ice cream — oh, and pineapple on pizza."
     },
     {
-        question: "If you had 24 hours in a new city with no plans, what's the first thing you'd do?",
-        answer: "Go to a café, grab a coffee, and ask the waiter for local tips. They always know the good stuff."
+        question: "What's the first thing Lia would do in a new city with no plans?",
+        answer: "Lia would go to a café, grab a coffee, and ask the waiter for local tips. They always know the good stuff."
     },
     {
-        question: "What would 10-year-old you be most surprised you're doing today?",
-        answer: "Living in Lisbon for my studies and meeting people from all over the world. At that age, little Lia had no idea how big and full of possibility life could be."
+        question: "What would 10-year-old Lia be most surprised she's doing today?",
+        answer: "Lia is living in Lisbon for her studies and meeting people from all over the world. At that age, little Lia had no idea how big and full of possibility life could be."
     }
 ];
 
