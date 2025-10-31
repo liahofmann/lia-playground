@@ -1,151 +1,136 @@
-// GTM Quiz Data
-const quizData = [
+// LiaGPT Chat Data
+const chatData = [
     {
-        question: "How would you prefer to acquire your first 100 customers?",
-        answers: [
-            { text: "Pick up the phone and call them directly", score: { sales: 3, product: 0, community: 0, content: 1 } },
-            { text: "Build something so good they can't help but share it", score: { sales: 0, product: 3, community: 1, content: 0 } },
-            { text: "Create a passionate community around the problem you're solving", score: { sales: 0, product: 1, community: 3, content: 1 } },
-            { text: "Publish insights that make people think 'I need to work with this person'", score: { sales: 1, product: 0, community: 1, content: 3 } }
-        ]
+        question: "If you were an animal, what would you be — and why?",
+        answer: "A dolphin: social, curious, and always on the move. I love exploring, connecting with others, and finding fun even in serious situations."
     },
     {
-        question: "What's your ideal relationship with early customers?",
-        answers: [
-            { text: "Close partnership — I'm on speed dial solving their problems", score: { sales: 3, product: 0, community: 1, content: 1 } },
-            { text: "They love the product so much they become advocates without me asking", score: { sales: 0, product: 3, community: 1, content: 0 } },
-            { text: "They're part of a movement, contributing ideas and bringing others in", score: { sales: 0, product: 1, community: 3, content: 1 } },
-            { text: "They see me as a trusted voice and come back for more wisdom", score: { sales: 1, product: 0, community: 1, content: 3 } }
-        ]
+        question: "What's your most controversial food that you like?",
+        answer: "I really love mint chocolate chip ice cream — oh, and pineapple on pizza."
     },
     {
-        question: "How should people discover what you're building?",
-        answers: [
-            { text: "Through a well-timed cold email or LinkedIn message from me", score: { sales: 3, product: 0, community: 0, content: 1 } },
-            { text: "By stumbling on it and instantly seeing the value", score: { sales: 0, product: 3, community: 0, content: 1 } },
-            { text: "A friend in the community says 'you have to check this out'", score: { sales: 0, product: 1, community: 3, content: 1 } },
-            { text: "They read something I wrote and think 'this person gets it'", score: { sales: 1, product: 0, community: 1, content: 3 } }
-        ]
+        question: "If you had 24 hours in a new city with no plans, what's the first thing you'd do?",
+        answer: "Go to a café, grab a coffee, and ask the waiter for local tips. They always know the good stuff."
     },
     {
-        question: "What excites you most about growth?",
-        answers: [
-            { text: "Closing deals and building real relationships one customer at a time", score: { sales: 3, product: 0, community: 1, content: 0 } },
-            { text: "Watching usage metrics climb because the product speaks for itself", score: { sales: 0, product: 3, community: 0, content: 1 } },
-            { text: "Seeing people connect, collaborate, and champion what you've built", score: { sales: 0, product: 1, community: 3, content: 1 } },
-            { text: "Becoming a go-to voice that attracts the right opportunities naturally", score: { sales: 1, product: 0, community: 1, content: 3 } }
-        ]
+        question: "What would 10-year-old you be most surprised you're doing today?",
+        answer: "Living in Lisbon for my studies and meeting people from all over the world. At that age, little Lia had no idea how big and full of possibility life could be."
     }
 ];
 
-const gtmResults = {
-    sales: {
-        title: "Sales-Led GTM",
-        description: "You're a relationship builder who thrives on direct conversations and closing deals. Your superpower is understanding customer needs deeply and crafting solutions through 1:1 engagement. Build your outbound engine, get on calls, and let your hustle turn conversations into revenue."
-    },
-    product: {
-        title: "Product-Led Growth",
-        description: "You believe the product should do the talking. Your approach is to build something so intuitive and valuable that users can't help but spread the word. Focus on an amazing user experience, viral loops, and letting metrics guide your iteration."
-    },
-    community: {
-        title: "Community-First GTM",
-        description: "You're a movement builder who knows that the best growth comes from passionate advocates. Your strength is creating spaces where people connect, contribute, and champion what you're building. Invest in your community and watch them become your growth engine."
-    },
-    content: {
-        title: "Content & Thought Leadership",
-        description: "You win by sharing insights that make people lean in and think. Your GTM strategy is about building trust and authority through valuable content that attracts the right audience. Publish, teach, and let your expertise create inbound opportunities."
-    }
-};
-
-// Quiz State
-let currentQuestion = 0;
-let scores = { sales: 0, product: 0, community: 0, content: 0 };
-
 // DOM Elements
-const questionContainer = document.getElementById('question-container');
-const resultContainer = document.getElementById('result-container');
-const questionText = document.getElementById('question-text');
-const answersContainer = document.getElementById('answers-container');
-const resultTitle = document.getElementById('result-title');
-const resultDescription = document.getElementById('result-description');
-const restartBtn = document.getElementById('restart-btn');
-const currentQuestionSpan = document.getElementById('current-question');
-const progressBar = document.getElementById('progress-bar');
+const chatMessages = document.getElementById('chat-messages');
+const questionButtons = document.getElementById('question-buttons');
 
-// Initialize Quiz
-function initQuiz() {
-    currentQuestion = 0;
-    scores = { sales: 0, product: 0, community: 0, content: 0 };
-    questionContainer.style.display = 'block';
-    resultContainer.style.display = 'none';
-    showQuestion();
+// Track asked questions
+let askedQuestions = new Set();
+
+// Initialize Chat
+function initChat() {
+    // Display initial greeting
+    addMessage("Hi! I'm LiaGPT. Ask me anything about Lia! 👋", 'bot');
+
+    // Create question buttons
+    renderQuestionButtons();
 }
 
-// Display Current Question
-function showQuestion() {
-    const current = quizData[currentQuestion];
-    questionText.textContent = current.question;
-    answersContainer.innerHTML = '';
+// Render question buttons
+function renderQuestionButtons() {
+    questionButtons.innerHTML = '';
 
-    // Update progress
-    const progressPercentage = ((currentQuestion) / quizData.length) * 100;
-    progressBar.style.width = progressPercentage + '%';
-    currentQuestionSpan.textContent = currentQuestion + 1;
-
-    current.answers.forEach((answer, index) => {
-        const button = document.createElement('button');
-        button.className = 'answer-btn';
-        button.textContent = answer.text;
-        button.addEventListener('click', () => selectAnswer(index));
-        answersContainer.appendChild(button);
+    chatData.forEach((item, index) => {
+        if (!askedQuestions.has(index)) {
+            const button = document.createElement('button');
+            button.className = 'question-btn';
+            button.textContent = item.question;
+            button.addEventListener('click', () => askQuestion(index));
+            questionButtons.appendChild(button);
+        }
     });
-}
 
-// Handle Answer Selection
-function selectAnswer(answerIndex) {
-    const selectedAnswer = quizData[currentQuestion].answers[answerIndex];
-
-    // Update scores
-    scores.sales += selectedAnswer.score.sales;
-    scores.product += selectedAnswer.score.product;
-    scores.community += selectedAnswer.score.community;
-    scores.content += selectedAnswer.score.content;
-
-    currentQuestion++;
-
-    if (currentQuestion < quizData.length) {
-        showQuestion();
-    } else {
-        showResult();
+    // If all questions asked, show reset option
+    if (askedQuestions.size === chatData.length) {
+        const resetBtn = document.createElement('button');
+        resetBtn.className = 'question-btn reset-btn';
+        resetBtn.textContent = '🔄 Ask more questions';
+        resetBtn.addEventListener('click', resetChat);
+        questionButtons.appendChild(resetBtn);
     }
 }
 
-// Calculate and Display Result
-function showResult() {
-    questionContainer.style.display = 'none';
-    resultContainer.style.display = 'block';
+// Ask a question
+function askQuestion(index) {
+    const item = chatData[index];
 
-    // Find the GTM approach with highest score
-    const maxScore = Math.max(scores.sales, scores.product, scores.community, scores.content);
-    let resultKey;
+    // Add user question
+    addMessage(item.question, 'user');
 
-    if (scores.sales === maxScore) {
-        resultKey = 'sales';
-    } else if (scores.product === maxScore) {
-        resultKey = 'product';
-    } else if (scores.community === maxScore) {
-        resultKey = 'community';
-    } else {
-        resultKey = 'content';
-    }
+    // Mark as asked
+    askedQuestions.add(index);
 
-    const result = gtmResults[resultKey];
-    resultTitle.textContent = result.title;
-    resultDescription.textContent = result.description;
+    // Show typing indicator
+    const typingId = addTypingIndicator();
+
+    // Simulate thinking time, then show answer
+    setTimeout(() => {
+        removeTypingIndicator(typingId);
+        addMessage(item.answer, 'bot');
+        renderQuestionButtons();
+    }, 800);
 }
 
-// Restart Quiz
-restartBtn.addEventListener('click', initQuiz);
+// Add message to chat
+function addMessage(text, sender) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `chat-message ${sender}-message`;
 
-// Start quiz on page load
-initQuiz();
+    const bubble = document.createElement('div');
+    bubble.className = 'message-bubble';
+    bubble.textContent = text;
+
+    messageDiv.appendChild(bubble);
+    chatMessages.appendChild(messageDiv);
+
+    // Scroll to bottom
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    // Animate in
+    setTimeout(() => {
+        messageDiv.classList.add('visible');
+    }, 10);
+}
+
+// Add typing indicator
+function addTypingIndicator() {
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'chat-message bot-message typing-indicator';
+    typingDiv.id = 'typing-' + Date.now();
+
+    const bubble = document.createElement('div');
+    bubble.className = 'message-bubble';
+    bubble.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+
+    typingDiv.appendChild(bubble);
+    chatMessages.appendChild(typingDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    return typingDiv.id;
+}
+
+// Remove typing indicator
+function removeTypingIndicator(id) {
+    const indicator = document.getElementById(id);
+    if (indicator) {
+        indicator.remove();
+    }
+}
+
+// Reset chat
+function resetChat() {
+    askedQuestions.clear();
+    chatMessages.innerHTML = '';
+    initChat();
+}
+
+// Start chat on page load
+initChat();

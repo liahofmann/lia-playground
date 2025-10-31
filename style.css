@@ -105,6 +105,28 @@ section h2::before {
     border-radius: 3px;
 }
 
+/* Centered section heading with decorative lines */
+.projects-section h2 {
+    text-align: center;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.projects-section h2::before,
+.projects-section h2::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    max-width: 200px;
+    position: static;
+    transform: none;
+    border-radius: 0;
+}
+
 /* Project Cards */
 .projects {
     display: flex;
@@ -132,17 +154,26 @@ section h2::before {
     width: 100%;
     height: 180px;
     object-fit: cover;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    background: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 30px;
+    padding: 40px;
 }
 
 .project-logo img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.05));
+}
+
+/* Circular logo for Blond & Beyond */
+.project-card:nth-child(3) .project-logo img {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 140px;
+    height: 140px;
 }
 
 .project-content {
@@ -205,58 +236,125 @@ section h2::before {
     text-align: center;
 }
 
-#quiz-container {
-    min-height: 350px;
+/* Chat Container */
+#chat-container {
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
 }
 
-/* Quiz Progress */
-.quiz-progress {
-    margin-bottom: 30px;
-}
-
-.progress-info {
-    text-align: center;
-    font-size: 0.95rem;
-    color: #667eea;
-    font-weight: 600;
-    margin-bottom: 12px;
-}
-
-.progress-bar-container {
-    width: 100%;
-    height: 8px;
-    background: #e9ecef;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.progress-bar {
-    height: 100%;
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-    border-radius: 10px;
-    transition: width 0.4s ease;
-    width: 0%;
-}
-
-#question-text {
-    font-size: 1.4rem;
-    color: #1a1a2e;
-    margin-bottom: 30px;
-    font-weight: 600;
-    line-height: 1.4;
-}
-
-#answers-container {
+#chat-messages {
+    background: #f8f9fa;
+    border-radius: 16px;
+    padding: 25px;
+    min-height: 300px;
+    max-height: 450px;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.answer-btn {
+/* Chat Messages */
+.chat-message {
+    display: flex;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.chat-message.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.user-message {
+    justify-content: flex-end;
+}
+
+.bot-message {
+    justify-content: flex-start;
+}
+
+.message-bubble {
+    max-width: 75%;
+    padding: 14px 18px;
+    border-radius: 18px;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.user-message .message-bubble {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.bot-message .message-bubble {
+    background: white;
+    color: #1a1a2e;
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Typing Indicator */
+.typing-indicator .message-bubble {
+    display: flex;
+    gap: 6px;
+    padding: 14px 18px;
+}
+
+.typing-indicator .dot {
+    width: 8px;
+    height: 8px;
+    background: #667eea;
+    border-radius: 50%;
+    animation: typing 1.4s infinite;
+}
+
+.typing-indicator .dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator .dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.7;
+    }
+    30% {
+        transform: translateY(-8px);
+        opacity: 1;
+    }
+}
+
+/* Question Buttons */
+#chat-questions {
+    margin-top: 10px;
+}
+
+.chat-prompt {
+    font-size: 1rem;
+    color: #5a5a5a;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+#question-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.question-btn {
     background: white;
     border: 2px solid #e9ecef;
-    padding: 18px 25px;
-    font-size: 1.05rem;
+    padding: 15px 20px;
+    font-size: 0.98rem;
     color: #1a1a2e;
     border-radius: 12px;
     cursor: pointer;
@@ -266,54 +364,25 @@ section h2::before {
     font-weight: 500;
 }
 
-.answer-btn:hover {
+.question-btn:hover {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border-color: #667eea;
-    transform: translateX(8px);
+    transform: translateX(6px);
     box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
 }
 
-/* Result Container */
-#result-container {
-    text-align: center;
-    padding: 40px;
-}
-
-#result-title {
-    font-size: 2.2rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 20px;
-    font-weight: 700;
-}
-
-#result-description {
-    font-size: 1.15rem;
-    color: #4a4a4a;
-    line-height: 1.8;
-    margin-bottom: 35px;
-}
-
-#restart-btn {
+.reset-btn {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    border: none;
-    padding: 14px 40px;
-    font-size: 1.05rem;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: inherit;
+    border-color: #667eea;
+    text-align: center;
     font-weight: 600;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
 }
 
-#restart-btn:hover {
+.reset-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
 }
 
 /* Footer */

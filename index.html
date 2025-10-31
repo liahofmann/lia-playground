@@ -63,27 +63,16 @@
             </div>
         </section>
 
-        <!-- Interactive Quiz Section -->
+        <!-- LiaGPT Section -->
         <section class="interactive">
-            <h2>GTM Idea & Outreach Generator</h2>
-            <p class="intro">Curious about which go-to-market approach fits your style? Take this quick quiz!</p>
+            <h2>Ask LiaGPT</h2>
+            <p class="intro">Wanna get to know me on a more personal level? Ask LiaGPT — she literally knows everything about me.</p>
 
-            <div id="quiz-container">
-                <div id="question-container">
-                    <div class="quiz-progress">
-                        <div class="progress-info">Question <span id="current-question">1</span> of 4</div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar" id="progress-bar"></div>
-                        </div>
-                    </div>
-                    <p id="question-text"></p>
-                    <div id="answers-container"></div>
-                </div>
-
-                <div id="result-container" style="display: none;">
-                    <h3 id="result-title"></h3>
-                    <p id="result-description"></p>
-                    <button id="restart-btn">Try Again</button>
+            <div id="chat-container">
+                <div id="chat-messages"></div>
+                <div id="chat-questions">
+                    <p class="chat-prompt">Choose a question to ask:</p>
+                    <div id="question-buttons"></div>
                 </div>
             </div>
         </section>
